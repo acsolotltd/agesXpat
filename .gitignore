@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Eleventy build output
+_site/
+dist/
+_build/
+public/
+
+# Eleventy cache
+.11ty/
+.cache/
+.eleventy-cache/
+
+# Tailwind
+# If you output tailwind.css to css/
+# Keep src input but ignore built file
+# Uncomment if needed:
+# assets/css/tailwind.css
+# assets/css/main.css
+
+# Env & OS
+.env
+.env.local
+.env.*.local
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# No need to push
+coverage/
+.nyc_output/

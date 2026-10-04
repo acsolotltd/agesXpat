@@ -1,0 +1,101 @@
+<!-- =========================================
+     TESTIMONIALS SLIDER (Visible Instantly)
+========================================== -->
+<section class="py-24 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300"
+         x-data="{ 
+            activeSlide: 0, 
+            slides: 3, 
+            timer: null,
+            next() { this.activeSlide = (this.activeSlide === this.slides - 1) ? 0 : this.activeSlide + 1; },
+            prev() { this.activeSlide = (this.activeSlide === 0) ? this.slides - 1 : this.activeSlide - 1; }
+         }" 
+         x-init="timer = setInterval(() => next(), 6000);">
+  
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
+        Trusted by Industry Leaders
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-400">
+        Hear from the corporate, agricultural, and institutional partners who rely on our infrastructure daily.
+      </p>
+    </div>
+
+    <!-- Slider Container -->
+    <div class="relative max-w-4xl mx-auto" 
+         @mouseenter="clearInterval(timer)" 
+         @mouseleave="timer = setInterval(() => next(), 6000)">
+      
+      <!-- Slides Wrapper (Overflow Hidden) -->
+      <div class="overflow-hidden rounded-3xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-indigo-900/10 relative">
+        
+        <!-- Large Background Quote Icon -->
+        <svg class="absolute top-10 right-10 w-24 h-24 text-amber-500/5 dark:text-amber-500/10 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+
+        <!-- Inner Sliding Track -->
+        <div class="flex transition-transform duration-700 ease-in-out" 
+             :style="`transform: translateX(-${activeSlide * 100}%)`">
+          
+          <!-- Slide 1 (IT & CCTV) -->
+          <div class="w-full shrink-0 flex-none px-8 py-16 md:px-16 md:py-20 flex flex-col justify-center text-center">
+            <p class="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic mb-10 leading-relaxed max-w-3xl mx-auto">
+              "Ages Xpat entirely overhauled our corporate network and CCTV infrastructure across three facility branches. Their attention to detail, robust hardware selection, and post-deployment management have been unmatched."
+            </p>
+            <div class="inline-flex flex-col items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center font-bold text-indigo-700 dark:text-indigo-400 mb-4 shadow-inner">OA</div>
+              <div class="font-bold text-lg text-slate-900 dark:text-white">Operations Director</div>
+              <div class="text-sm text-amber-600 dark:text-amber-500 uppercase tracking-wider font-semibold mt-1">Agro-Allied Facility, Edo</div>
+            </div>
+          </div>
+
+          <!-- Slide 2 (Software Development) -->
+          <div class="w-full shrink-0 flex-none px-8 py-16 md:px-16 md:py-20 flex flex-col justify-center text-center">
+            <p class="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic mb-10 leading-relaxed max-w-3xl mx-auto">
+              "They bridge the gap between physical operations and digital workflows. The custom enterprise resource software they designed automated our reporting pipeline, saving us hundreds of man-hours a month."
+            </p>
+            <div class="inline-flex flex-col items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-teal-100 dark:bg-teal-900/50 flex items-center justify-center font-bold text-teal-700 dark:text-teal-400 mb-4 shadow-inner">CE</div>
+              <div class="font-bold text-lg text-slate-900 dark:text-white">Chief Engineer</div>
+              <div class="text-sm text-amber-600 dark:text-amber-500 uppercase tracking-wider font-semibold mt-1">Lagos Logistics Firm</div>
+            </div>
+          </div>
+
+          <!-- Slide 3 (Consulting & Training) -->
+          <div class="w-full shrink-0 flex-none px-8 py-16 md:px-16 md:py-20 flex flex-col justify-center text-center">
+            <p class="text-xl md:text-2xl text-slate-700 dark:text-slate-300 italic mb-10 leading-relaxed max-w-3xl mx-auto">
+              "Beyond their IT consultancy, the corporate technical training they provided for our in-house department was a game changer. Our team is now fully equipped to manage our internal infrastructure proactively."
+            </p>
+            <div class="inline-flex flex-col items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center font-bold text-amber-700 dark:text-amber-500 mb-4 shadow-inner">HK</div>
+              <div class="font-bold text-lg text-slate-900 dark:text-white">Head of IT</div>
+              <div class="text-sm text-amber-600 dark:text-amber-500 uppercase tracking-wider font-semibold mt-1">Educational Institution</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button @click="prev()" class="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full items-center justify-center text-slate-600 dark:text-slate-400 hover:text-amber-500 hover:border-amber-500 shadow-lg transition-all focus:outline-none z-10" aria-label="Previous Slide">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+      </button>
+      
+      <button @click="next()" class="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-12 h-12 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full items-center justify-center text-slate-600 dark:text-slate-400 hover:text-amber-500 hover:border-amber-500 shadow-lg transition-all focus:outline-none z-10" aria-label="Next Slide">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+      </button>
+
+      <!-- Pagination Dots -->
+      <div class="flex justify-center items-center gap-3 mt-8">
+        <template x-for="i in slides" :key="i">
+          <button @click="activeSlide = i - 1" 
+                  class="h-3 rounded-full transition-all duration-300 focus:outline-none"
+                  :class="activeSlide === i - 1 ? 'w-8 bg-amber-500' : 'w-3 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'"
+                  :aria-label="'Go to slide ' + i"></button>
+        </template>
+      </div>
+
+    </div>
+  </div>
+</section>

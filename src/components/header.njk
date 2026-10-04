@@ -1,0 +1,231 @@
+<!-- =========================================
+     GLOBAL HEADER / NAVBAR (With Built-in Theme Switcher)
+========================================== -->
+<header x-data="{ 
+          mobileMenuOpen: false, 
+          scrolled: false,
+          isDark: false,
+          init() {
+            this.isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if(this.isDark) document.documentElement.classList.add('dark');
+          },
+          toggleTheme() {
+            this.isDark = !this.isDark;
+            localStorage.theme = this.isDark ? 'dark' : 'light';
+            if (this.isDark) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          }
+        }" 
+        @scroll.window="scrolled = (window.pageYOffset > 20) ? true : false"
+        class="fixed top-0 inset-x-0 z-50 transition-all duration-300 flex flex-col">
+  
+  <!-- 1. TOP BAR (Hidden on Mobile, Visible on Desktop) -->
+  <div class="hidden lg:flex justify-between items-center px-4 sm:px-6 lg:px-8 py-2 bg-slate-900 text-slate-300 dark:bg-black transition-colors duration-300">
+    
+    <!-- Contact Info (Address & Phone) -->
+    <div class="flex items-center gap-6 text-xs font-medium">
+      <div class="flex items-center gap-2 hover:text-amber-500 transition-colors cursor-default">
+        <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        <span>HQ: 1, Oribanwa Street, Ibeju-lekki Ajah, Lagos State, Nigeria.</span>
+      </div>
+      <a href="tel:+2349023394664" class="flex items-center gap-2 hover:text-amber-500 transition-colors">
+        <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+        <span>+234 (0) 902 339 4664</span>
+      </a>
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="flex items-center gap-4">
+      <a href="https://www.linkedin.com/company/ages-xpat-technologies/" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="LinkedIn"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+      <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="X (Twitter)"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.975H5.078z"/></svg></a>
+      <a href="https://www.facebook.com/AgesXpat" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Facebook"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+      <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Instagram"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="https://wa.me/2349023394664" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="WhatsApp"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0c-6.627 0-12 5.373-12 12 0 2.124.55 4.129 1.521 5.892l-1.552 5.666 5.801-1.523c1.71.888 3.639 1.393 5.688 1.393 6.627 0 12-5.373 12-12s-5.373-12-12-12zm5.495 17.185c-.254.717-1.492 1.328-2.062 1.411-.533.078-1.218.176-3.447-.747-2.684-1.111-4.407-3.83-4.542-4.01-.132-.178-1.085-1.445-1.085-2.754 0-1.309.684-1.956.929-2.222.245-.268.533-.335.711-.335.178 0 .356 0 .512.008.163.008.384-.061.6.46.222.535.755 1.84.822 1.974.067.134.111.29.022.469-.089.178-.134.29-.267.446-.133.155-.278.334-.401.467-.133.134-.275.28-.12.547.155.267.691 1.144 1.482 1.849 1.023.913 1.879 1.196 2.146 1.33.267.134.423.111.579-.067.155-.178.667-.779.845-1.045.178-.267.356-.222.599-.134.244.089 1.556.735 1.823.869.267.134.444.201.512.313.067.112.067.646-.187 1.363z"/></svg></a>
+    </div>
+  </div>
+
+  <!-- 2. MAIN NAVBAR -->
+  <nav :class="{ 'shadow-md dark:shadow-slate-900/50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-slate-200 dark:border-slate-800': scrolled, 'bg-white dark:bg-slate-950 border-transparent': !scrolled }"
+       class="w-full flex-1 border-b transition-all duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between p-4 sm:px-6 lg:px-8">
+      
+      <!-- Logo -->
+      <div class="flex lg:flex-1">
+        <a href="/" class="-m-1.5 p-1.5 text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Ages Xpat<span class="text-amber-500">.</span>
+        </a>
+      </div>
+
+      <!-- Mobile Theme Toggle & Menu Button -->
+      <div class="flex lg:hidden items-center gap-4">
+        
+        <!-- Mobile Dark Mode Toggle Button -->
+        <button @click="toggleTheme()" class="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+          <!-- Moon Icon (Shows in Light Mode) -->
+          <svg x-show="!isDark" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+          <!-- Sun Icon (Shows in Dark Mode) -->
+          <svg x-show="isDark" x-cloak class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+        </button>
+        
+        <!-- Hamburger Icon -->
+        <button type="button" @click="mobileMenuOpen = true" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-slate-700 dark:text-slate-300 hover:text-amber-500 focus:outline-none">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desktop Navigation Links -->
+      <div class="hidden lg:flex lg:items-center lg:gap-x-8">
+        <a href="/" class="text-sm font-semibold leading-6 text-slate-900 dark:text-slate-200 hover:text-amber-500 dark:hover:text-amber-400 transition-colors">Home</a>
+        <a href="/about" class="text-sm font-semibold leading-6 text-slate-900 dark:text-slate-200 hover:text-amber-500 dark:hover:text-amber-400 transition-colors">About Us</a>
+        
+        <!-- Services Dropdown (Alpine.js) -->
+        <div class="relative" x-data="{ dropdownOpen: false }" @mouseenter="dropdownOpen = true" @mouseleave="dropdownOpen = false">
+          <button @click="dropdownOpen = !dropdownOpen" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-slate-900 dark:text-slate-200 hover:text-amber-500 dark:hover:text-amber-400 transition-colors focus:outline-none">
+            Services
+            <svg class="h-4 w-4 flex-none text-slate-400" :class="{'rotate-180 text-amber-500': dropdownOpen}" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" style="transition: transform 0.2s;">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          
+          <!-- Dropdown Panel -->
+          <div x-show="dropdownOpen" x-cloak 
+               x-transition:enter="transition ease-out duration-200" 
+               x-transition:enter-start="opacity-0 translate-y-1" 
+               x-transition:enter-end="opacity-100 translate-y-0" 
+               x-transition:leave="transition ease-in duration-150" 
+               x-transition:leave-start="opacity-100 translate-y-0" 
+               x-transition:leave-end="opacity-0 translate-y-1" 
+               class="absolute -left-4 top-full z-10 mt-3 w-64 rounded-xl bg-white dark:bg-slate-900 shadow-xl dark:shadow-slate-950 ring-1 ring-slate-900/5 dark:ring-slate-800 overflow-hidden">
+            <div class="p-2">
+              <a href="/services#consultancy" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">IT Consultancy Services</a>
+              <a href="/services#software" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Software Design & Dev</a>
+              <a href="/services#cctv" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">CCTV & Security Installs</a>
+              <a href="/services#management" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Corporate System Mgmt</a>
+              <a href="/services#training" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Technical Training</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/projects" class="text-sm font-semibold leading-6 text-slate-900 dark:text-slate-200 hover:text-amber-500 dark:hover:text-amber-400 transition-colors">Projects</a>
+      </div>
+
+      <!-- Desktop Right Actions (Dark Mode + CTA) -->
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-6">
+        
+        <!-- Desktop Dark Mode Toggle Button -->
+        <button @click="toggleTheme()" class="text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+          <!-- Moon Icon (Shows in Light Mode) -->
+          <svg x-show="!isDark" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+          <!-- Sun Icon (Shows in Dark Mode) -->
+          <svg x-show="isDark" x-cloak class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+        </button>
+
+        <a href="/contact" class="text-sm font-bold leading-6 text-slate-900 dark:text-slate-900 bg-amber-500 hover:bg-amber-400 px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900">
+          Request an Audit <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================
+       MOBILE MENU (Slide-over)
+  ========================================== -->
+  <div class="lg:hidden" x-show="mobileMenuOpen" x-cloak z-index="100">
+    
+    <!-- Background backdrop -->
+    <div class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm" 
+         x-show="mobileMenuOpen" 
+         x-transition:enter="transition-opacity ease-linear duration-300" 
+         x-transition:enter-start="opacity-0" 
+         x-transition:enter-end="opacity-100" 
+         x-transition:leave="transition-opacity ease-linear duration-300" 
+         x-transition:leave-start="opacity-100" 
+         x-transition:leave-end="opacity-0"
+         @click="mobileMenuOpen = false"></div>
+    
+    <!-- Sliding panel -->
+    <div class="fixed inset-y-0 right-0 z-50 w-80 .w-full overflow-y-auto bg-white dark:bg-slate-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-slate-900/10 transition-transform transform duration-300 shadow-2xl flex flex-col"
+         x-show="mobileMenuOpen"
+         x-transition:enter="transition ease-out duration-300 transform"
+         x-transition:enter-start="translate-x-full"
+         x-transition:enter-end="translate-x-0"
+         x-transition:leave="transition ease-in duration-300 transform"
+         x-transition:leave-start="translate-x-0"
+         x-transition:leave-end="translate-x-full">
+      
+      <!-- Mobile Header -->
+      <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
+        <a href="/" class="-m-1.5 p-1.5 text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Ages Xpat<span class="text-amber-500">.</span>
+        </a>
+        <button type="button" @click="mobileMenuOpen = false" class="-m-2.5 rounded-md p-2.5 text-slate-700 dark:text-slate-300 hover:text-amber-500 focus:outline-none">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Links -->
+      <div class="mt-6 flex-1" x-data="{ mobileServicesOpen: false }">
+        <div class="space-y-2">
+          <a href="/" class="-mx-3 block rounded-lg px-3 py-3 text-base font-semibold leading-7 text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-amber-500 transition-colors">Home</a>
+          <a href="/about" class="-mx-3 block rounded-lg px-3 py-3 text-base font-semibold leading-7 text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-amber-500 transition-colors">About Us</a>
+          
+          <!-- Mobile Services Dropdown Accordion -->
+          <button @click="mobileServicesOpen = !mobileServicesOpen" class="-mx-3 flex w-full items-center justify-between rounded-lg py-3 pl-3 pr-3.5 text-base font-semibold leading-7 text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-amber-500 focus:outline-none transition-colors">
+            Services
+            <svg class="h-5 w-5 flex-none" :class="{'rotate-180 text-amber-500': mobileServicesOpen}" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" style="transition: transform 0.2s;">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div x-show="mobileServicesOpen" class="mt-2 space-y-1 pl-4 border-l-2 border-amber-500/20 ml-2">
+            <a href="/services#consultancy" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">IT Consultancy Services</a>
+            <a href="/services#software" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Software Design & Dev</a>
+            <a href="/services#cctv" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">CCTV & Security Installs</a>
+            <a href="/services#management" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Corporate System Mgmt</a>
+            <a href="/services#training" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Technical Training</a>
+          </div>
+
+          <a href="/projects" class="-mx-3 block rounded-lg px-3 py-3 text-base font-semibold leading-7 text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-amber-500 transition-colors">Projects</a>
+        </div>
+      </div>
+
+      <!-- Mobile Bottom Section (Contact, Socials, CTA) -->
+      <div class="mt-8 border-t border-slate-100 dark:border-slate-800 pt-8 space-y-6">
+        
+        <!-- Mobile Contact Info -->
+        <div class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <span>HQ: 1, Oribanwa Street, Ibeju-lekki Ajah, Lagos State, Nigeria.</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+	<div>
+            <a href="tel:+2349023394664" class="inline-block hover:text-amber-500 transition-colors">+234 (0) 902 339 4664</a>
+	          <a href="tel:+2349023394664" class="inline-block hover:text-amber-500 transition-colors">+234 (0) 902 339 4664</a>
+	</div>
+          </div>
+        </div>
+
+        <!-- Mobile Social Links -->
+        <div class="flex items-center gap-5">
+          <a href="https://www.linkedin.com/company/ages-xpat-technologies/" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+          <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="X (Twitter)"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.975H5.078z"/></svg></a>
+          <a href="https://www.facebook.com/AgesXpat" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+          <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Instagram"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://wa.me/2349023394664" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="WhatsApp"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0c-6.627 0-12 5.373-12 12 0 2.124.55 4.129 1.521 5.892l-1.552 5.666 5.801-1.523c1.71.888 3.639 1.393 5.688 1.393 6.627 0 12-5.373 12-12s-5.373-12-12-12zm5.495 17.185c-.254.717-1.492 1.328-2.062 1.411-.533.078-1.218.176-3.447-.747-2.684-1.111-4.407-3.83-4.542-4.01-.132-.178-1.085-1.445-1.085-2.754 0-1.309.684-1.956.929-2.222.245-.268.533-.335.711-.335.178 0 .356 0 .512.008.163.008.384-.061.6.46.222.535.755 1.84.822 1.974.067.134.111.29.022.469-.089.178-.134.29-.267.446-.133.155-.278.334-.401.467-.133.134-.275.28-.12.547.155.267.691 1.144 1.482 1.849 1.023.913 1.879 1.196 2.146 1.33.267.134.423.111.579-.067.155-.178.667-.779.845-1.045.178-.267.356-.222.599-.134.244.089 1.556.735 1.823.869.267.134.444.201.512.313.067.112.067.646-.187 1.363z"/></svg></a>
+        </div>
+
+        <a href="/contact" class="-mx-3 block rounded-full px-3 py-3.5 text-base font-bold leading-7 text-slate-900 bg-amber-500 hover:bg-amber-400 text-center transition-colors shadow-md">Request an Audit &rarr;</a>
+      </div>
+    </div>
+  </div>
+</header>

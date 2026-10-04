@@ -1,0 +1,21 @@
+{
+  "name": "ages-xpat-technologies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium corporate website for Ages Xpat Technologies",
+   "type": "commonjs",
+  "scripts": {
+    "dev": "concurrently \"npx @11ty/eleventy --config=eleventy.config.cjs --serve\" \"npx @tailwindcss/cli -i ./src/input.css -o ./_site/output.css --watch\"",
+    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./_site/output.css --minify && npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "alpinejs": "^3.14.9",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "concurrently": "^9.1.2"
+  }
+}

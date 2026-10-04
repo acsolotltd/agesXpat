@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+
+/* =========================================================
+   TAILWIND V4 — MANUAL DARK MODE
+========================================================= */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* =========================================================
+   PROJECT SOURCES
+========================================================= */
+
+/*
+ * Tailwind v4 automatically detects source files.
+ * This explicit source keeps the Eleventy templates
+ * unambiguous for this project.
+ */
+
+@source "./";
+
+
+/* =========================================================
+   BRAND DESIGN TOKENS
+========================================================= */
+
+@theme {
+
+  /* -------------------------------------------------------
+     Brand colors
+  ------------------------------------------------------- */
+
+  --color-brand-dark: #1a0b2e;
+  --color-brand-light: #fdf8ff;
+  --color-brand-lavender: #e9d5ff;
+  --color-brand-gold: #facc15;
+  --color-brand-gold-dark: #d4af37;
+
+
+  /* -------------------------------------------------------
+     Typography
+  ------------------------------------------------------- */
+
+  --font-sans:
+    "Space Grotesk",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+
+  /* -------------------------------------------------------
+     Shadows
+  ------------------------------------------------------- */
+
+  --shadow-gold:
+    0 20px 60px rgba(250, 204, 21, 0.12);
+
+  --shadow-gold-lg:
+    0 25px 80px rgba(250, 204, 21, 0.18);
+
+  --shadow-luxury:
+    0 25px 80px rgba(26, 11, 46, 0.18);
+
+
+  /* -------------------------------------------------------
+     Animations
+  ------------------------------------------------------- */
+
+  --animate-float-slow:
+    float 7s ease-in-out infinite;
+
+  --animate-pulse-soft:
+    pulse-soft 3s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   CUSTOM BACKGROUNDS
+========================================================= */
+
+@utility bg-luxury-gradient {
+  background-image:
+    linear-gradient(
+      135deg,
+      #1a0b2e 0%,
+      #2d1450 48%,
+      #4c1d95 100%
+    );
+}
+
+@utility bg-gold-gradient {
+  background-image:
+    linear-gradient(
+      135deg,
+      #facc15 0%,
+      #d4af37 100%
+    );
+}
+
+@utility bg-purple-glow {
+  background-image:
+    radial-gradient(
+      circle at center,
+      rgba(139, 92, 246, 0.25),
+      transparent 65%
+    );
+}
+
+
+/* =========================================================
+   CUSTOM ANIMATIONS
+========================================================= */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+@layer base {
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family:
+      "Space Grotesk",
+      ui-sans-serif,
+      system-ui,
+      sans-serif;
+  }
+
+  ::selection {
+    background: #facc15;
+    color: #1a0b2e;
+  }
+
+}
+
+
+/* =========================================================
+   CUSTOM UTILITIES
+========================================================= */
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf8ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #facc15;
+}
+
+.dark::-webkit-scrollbar-track {
+  background: #1a0b2e;
+}
