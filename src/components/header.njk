@@ -1,5 +1,5 @@
 <!-- =========================================
-     GLOBAL HEADER / NAVBAR (With Built-in Theme Switcher)
+     GLOBAL HEADER / NAVBAR (With Built-in Theme & Meta Switcher)
 ========================================== -->
 <header x-data="{ 
           mobileMenuOpen: false, 
@@ -8,6 +8,7 @@
           init() {
             this.isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
             if(this.isDark) document.documentElement.classList.add('dark');
+            this.updateThemeColor();
           },
           toggleTheme() {
             this.isDark = !this.isDark;
@@ -17,6 +18,17 @@
             } else {
               document.documentElement.classList.remove('dark');
             }
+            this.updateThemeColor();
+          },
+          updateThemeColor() {
+            let metaTheme = document.querySelector('meta[name=\'theme-color\']');
+            if (!metaTheme) {
+              metaTheme = document.createElement('meta');
+              metaTheme.name = 'theme-color';
+              document.head.appendChild(metaTheme);
+            }
+            // #020617 is Tailwind's slate-950, #ffffff is white
+            metaTheme.content = this.isDark ? '#020617' : '#ffffff';
           }
         }" 
         @scroll.window="scrolled = (window.pageYOffset > 20) ? true : false"
@@ -42,7 +54,7 @@
       <a href="https://www.linkedin.com/company/ages-xpat-technologies/" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="LinkedIn"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
       <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="X (Twitter)"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.975H5.078z"/></svg></a>
       <a href="https://www.facebook.com/AgesXpat" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Facebook"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
-      <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Instagram"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="https://www.instagram.com/agesxpat" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Instagram"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
       <a href="https://wa.me/2349023394664" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="WhatsApp"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0c-6.627 0-12 5.373-12 12 0 2.124.55 4.129 1.521 5.892l-1.552 5.666 5.801-1.523c1.71.888 3.639 1.393 5.688 1.393 6.627 0 12-5.373 12-12s-5.373-12-12-12zm5.495 17.185c-.254.717-1.492 1.328-2.062 1.411-.533.078-1.218.176-3.447-.747-2.684-1.111-4.407-3.83-4.542-4.01-.132-.178-1.085-1.445-1.085-2.754 0-1.309.684-1.956.929-2.222.245-.268.533-.335.711-.335.178 0 .356 0 .512.008.163.008.384-.061.6.46.222.535.755 1.84.822 1.974.067.134.111.29.022.469-.089.178-.134.29-.267.446-.133.155-.278.334-.401.467-.133.134-.275.28-.12.547.155.267.691 1.144 1.482 1.849 1.023.913 1.879 1.196 2.146 1.33.267.134.423.111.579-.067.155-.178.667-.779.845-1.045.178-.267.356-.222.599-.134.244.089 1.556.735 1.823.869.267.134.444.201.512.313.067.112.067.646-.187 1.363z"/></svg></a>
     </div>
   </div>
@@ -55,7 +67,7 @@
       <!-- Logo -->
       <div class="flex lg:flex-1">
         <a href="/" class="-m-1.5 p-1.5 text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Ages Xpat<span class="text-amber-500">.</span>
+         <img src="/assets/logo.png" class="h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105" > 
         </a>
       </div>
 
@@ -103,11 +115,11 @@
                x-transition:leave-end="opacity-0 translate-y-1" 
                class="absolute -left-4 top-full z-10 mt-3 w-64 rounded-xl bg-white dark:bg-slate-900 shadow-xl dark:shadow-slate-950 ring-1 ring-slate-900/5 dark:ring-slate-800 overflow-hidden">
             <div class="p-2">
-              <a href="/services#consultancy" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">IT Consultancy Services</a>
-              <a href="/services#software" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Software Design & Dev</a>
-              <a href="/services#cctv" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">CCTV & Security Installs</a>
-              <a href="/services#management" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Corporate System Mgmt</a>
-              <a href="/services#training" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Technical Training</a>
+              <a href="/services/consultancy" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">IT Consultancy Services</a>
+              <a href="/services/software-development" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Software Design & Dev</a>
+              <a href="/services/cctv" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">CCTV & Security Installs</a>
+              <a href="/services/management" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Corporate System Mgmt</a>
+              <a href="/services/training" class="block rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors">Technical Training</a>
             </div>
           </div>
         </div>
@@ -162,7 +174,7 @@
       <!-- Mobile Header -->
       <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
         <a href="/" class="-m-1.5 p-1.5 text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Ages Xpat<span class="text-amber-500">.</span>
+	      <img src="/assets/logo.png" class="h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105" >
         </a>
         <button type="button" @click="mobileMenuOpen = false" class="-m-2.5 rounded-md p-2.5 text-slate-700 dark:text-slate-300 hover:text-amber-500 focus:outline-none">
           <span class="sr-only">Close menu</span>
@@ -186,11 +198,11 @@
             </svg>
           </button>
           <div x-show="mobileServicesOpen" class="mt-2 space-y-1 pl-4 border-l-2 border-amber-500/20 ml-2">
-            <a href="/services#consultancy" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">IT Consultancy Services</a>
-            <a href="/services#software" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Software Design & Dev</a>
-            <a href="/services#cctv" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">CCTV & Security Installs</a>
-            <a href="/services#management" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Corporate System Mgmt</a>
-            <a href="/services#training" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Technical Training</a>
+            <a href="/services/consultancy" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">IT Consultancy Services</a>
+            <a href="/services/software-development" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Software Design & Dev</a>
+            <a href="/services/cctv" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">CCTV & Security Installs</a>
+            <a href="/services/management" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Corporate System Mgmt</a>
+            <a href="/services/training" class="block rounded-lg py-2.5 pl-3 pr-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">Technical Training</a>
           </div>
 
           <a href="/projects" class="-mx-3 block rounded-lg px-3 py-3 text-base font-semibold leading-7 text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-amber-500 transition-colors">Projects</a>
@@ -220,7 +232,7 @@
           <a href="https://www.linkedin.com/company/ages-xpat-technologies/" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
           <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="X (Twitter)"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.975H5.078z"/></svg></a>
           <a href="https://www.facebook.com/AgesXpat" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
-          <a href="#" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Instagram"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://www.instagram.com/agesxpat" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="Instagram"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
           <a href="https://wa.me/2349023394664" class="text-slate-400 hover:text-amber-500 transition-colors" aria-label="WhatsApp"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0c-6.627 0-12 5.373-12 12 0 2.124.55 4.129 1.521 5.892l-1.552 5.666 5.801-1.523c1.71.888 3.639 1.393 5.688 1.393 6.627 0 12-5.373 12-12s-5.373-12-12-12zm5.495 17.185c-.254.717-1.492 1.328-2.062 1.411-.533.078-1.218.176-3.447-.747-2.684-1.111-4.407-3.83-4.542-4.01-.132-.178-1.085-1.445-1.085-2.754 0-1.309.684-1.956.929-2.222.245-.268.533-.335.711-.335.178 0 .356 0 .512.008.163.008.384-.061.6.46.222.535.755 1.84.822 1.974.067.134.111.29.022.469-.089.178-.134.29-.267.446-.133.155-.278.334-.401.467-.133.134-.275.28-.12.547.155.267.691 1.144 1.482 1.849 1.023.913 1.879 1.196 2.146 1.33.267.134.423.111.579-.067.155-.178.667-.779.845-1.045.178-.267.356-.222.599-.134.244.089 1.556.735 1.823.869.267.134.444.201.512.313.067.112.067.646-.187 1.363z"/></svg></a>
         </div>
 
