@@ -1,0 +1,66 @@
+<!-- =========================================
+     HOW WE WORK (Fixed Native Alpine.js)
+========================================== -->
+<section class="py-24 bg-white dark:bg-slate-950" 
+         x-data="{ shown: false }" 
+         x-init="let observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting) shown = true; }, { threshold: 0.2 }); observer.observe($el);">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-16">Our Proven Process</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      
+      
+      
+      <div class="relative transition-all duration-700 ease-out transform"
+           :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'" 
+           style="transition-delay: 0ms;">
+        <div class="w-16 h-16 mx-auto bg-amber-500 text-slate-900 font-bold text-2xl rounded-full flex items-center justify-center mb-6 shadow-md ring-8 ring-slate-50 dark:ring-slate-900">
+          1
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Site Audit &amp; Specs</h3>
+        <!-- Optional connecting line for desktop -->
+        
+        <div class="hidden md:block absolute top-8 left-[60%] w-full h-[2px] bg-slate-200 dark:bg-slate-800 -z-10"></div>
+        
+      </div>
+      
+      <div class="relative transition-all duration-700 ease-out transform"
+           :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'" 
+           style="transition-delay: 150ms;">
+        <div class="w-16 h-16 mx-auto bg-amber-500 text-slate-900 font-bold text-2xl rounded-full flex items-center justify-center mb-6 shadow-md ring-8 ring-slate-50 dark:ring-slate-900">
+          2
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white">System Architecture</h3>
+        <!-- Optional connecting line for desktop -->
+        
+        <div class="hidden md:block absolute top-8 left-[60%] w-full h-[2px] bg-slate-200 dark:bg-slate-800 -z-10"></div>
+        
+      </div>
+      
+      <div class="relative transition-all duration-700 ease-out transform"
+           :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'" 
+           style="transition-delay: 300ms;">
+        <div class="w-16 h-16 mx-auto bg-amber-500 text-slate-900 font-bold text-2xl rounded-full flex items-center justify-center mb-6 shadow-md ring-8 ring-slate-50 dark:ring-slate-900">
+          3
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Turnkey Deployment</h3>
+        <!-- Optional connecting line for desktop -->
+        
+        <div class="hidden md:block absolute top-8 left-[60%] w-full h-[2px] bg-slate-200 dark:bg-slate-800 -z-10"></div>
+        
+      </div>
+      
+      <div class="relative transition-all duration-700 ease-out transform"
+           :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'" 
+           style="transition-delay: 450ms;">
+        <div class="w-16 h-16 mx-auto bg-amber-500 text-slate-900 font-bold text-2xl rounded-full flex items-center justify-center mb-6 shadow-md ring-8 ring-slate-50 dark:ring-slate-900">
+          4
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Monthly SLA &amp; Support</h3>
+        <!-- Optional connecting line for desktop -->
+        
+      </div>
+      
+
+    </div>
+  </div>
+</section>

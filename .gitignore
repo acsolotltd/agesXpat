@@ -5,7 +5,7 @@ yarn.lock
 pnpm-lock.yaml
 
 # Eleventy build output
-_site/
+#_site/
 dist/
 _build/
 public/
