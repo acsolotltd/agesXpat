@@ -41,3 +41,5 @@ npm-debug.log*
 # No need to push
 coverage/
 .nyc_output/
+
+/vendor/

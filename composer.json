@@ -1,0 +1,15 @@
+{
+    "name": "u0_a273/agesxpat",
+    "autoload": {
+        "psr-4": {
+            "U0A273\\Agesxpat\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "moriire",
+            "email": "acsolotltd@gmail.com"
+        }
+    ],
+    "require": {}
+}

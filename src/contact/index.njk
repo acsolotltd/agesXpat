@@ -1,8 +1,10 @@
 ---
 layout: "base.njk"
-title: "About Ages Xpat Technologies | Contact Us"
-description: "Since 2009, Ages Xpat Technologies has"
+title: "About Ages Xpat Technologies | Our "
+description: "Since 2009, Ages Xpat Technol"
 ---
+
+<style>[x-cloak] { display: none !important; }</style>
 
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
   <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 transition-colors duration-300">
@@ -18,8 +20,11 @@ description: "Since 2009, Ages Xpat Technologies has"
       </p>
     </div>
 
-    <form action="#" method="POST" class="space-y-8" id="contact-form">
-      
+    <form @submit.prevent="submitForm"  class="space-y-8" id="contact-form" enctype="multipart/form-data">
+     
+
+    <!-- Dynamic CSRF Token (Populated via JS on load) -->
+      <input type="hidden" name="csrf_token" x-model="csrfToken"> 
       <!-- 1. Select Purpose / Inquiry Type -->
       <div>
         <label class="block text-sm font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider mb-4">
@@ -248,3 +253,24 @@ description: "Since 2009, Ages Xpat Technologies has"
     </form>
   </div>
 </div>
+
+
+<script>
+function contactForm() {                                     return {                                                     loading: false,                                            status: null,                                              responseMessage: '',
+    fileName: '',
+    csrfToken: '',                                             servicesList: ['IT Consultancy Services', 'Software Design & Dev', 'CCTV & Security Installs', 'Corporate System Mgmt', 'Technical Training'],                                                                                              init() {                                                     // Fetch dynamic CSRF token on component mount             fetch('/get-csrf-token.php')                                 .then(res => res.json())                                   .then(data => { if (data.csrf_token) this.csrfToken = data.csrf_token; })                                             .catch(() => {});                                      },                                                                                                                    handleFileChange(event) {                                    const file = event.target.files[0];
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+          alert('File size exceeds 10MB limit.');                    this.resetFileInput();
+          return;
+        }
+        this.fileName = file.name;                               }                                                        },                                                                                                                    resetFileInput() {                                           if (this.$refs.fileInput) this.$refs.fileInput.value = '';
+      this.fileName = '';                                      },                                                                                                                    async submitForm(event) {
+      this.loading = true;                                       this.status = null;                                        this.responseMessage = '';                                                                                            const formData = new FormData(event.target);         
+      try {
+        const response = await fetch('/send-email.php', {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },                                                                    body: formData                                           });                                                
+        const result = await response.json();                                                                                 if (response.ok && result.success) {                         this.status = 'success';                                   this.responseMessage = result.message;                     event.target.reset();                                      this.resetFileInput();                                   } else {                                                     this.status = 'error';                                     this.responseMessage = result.message || 'Submission failed. Please check inputs.';                                 }
+      } catch (err) {                                              this.status = 'error';                                     this.responseMessage = 'Network or server error. Please contact info@agesxpat.com.ng directly.';                    } finally {                                                  this.loading = false;                                    }                                                        }                                                        }
+}                                                          </script>

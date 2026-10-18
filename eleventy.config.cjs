@@ -1,20 +1,14 @@
 module.exports = function (eleventyConfig) {
-
-  /*
-   * Static assets
-   */
+  eleventyConfig.addPassthroughCopy({
+    "vendor": "vendor"
+  });   
+  eleventyConfig.addPassthroughCopy({
+    "public": "."
+  });
   eleventyConfig.addPassthroughCopy("src/assets");
 
-
-  /*
-   * Optional JavaScript directory
-   */
   eleventyConfig.addPassthroughCopy("src/js");
 
-
-  /*
-   * Custom Filters
-   */
   eleventyConfig.addFilter("date", function(dateObj) {
     // Standard JS formatting. Changes date objects to "YYYY-MM-DD"
     return new Date(dateObj).toISOString().split('T')[0];
